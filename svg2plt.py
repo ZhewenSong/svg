@@ -4,11 +4,6 @@ import re
 import xml.etree.ElementTree as ET
 import sys
 
-# image = Image.open('clef.png')
-# image = image.filter(ImageFilter.FIND_EDGES).convert('L')
-# image.save('outline.png') 
-# scale = [0.1, 0.1]
-
 N = 10
 supported_cmd = 'mlqcz'
 
@@ -95,7 +90,7 @@ for p in path:
         else:
             raise Exception('Unsupported cmd ' + cmd)
         if initx is None:
-            initx, inity = lastx, lasty 
+            initx, inity = lastx, lasty
     elif len(p) == 1:
         Xs = np.append(Xs, linear_bezier(t, [lastx, initx]))
         Ys = np.append(Ys, linear_bezier(t, [lasty, inity]))
