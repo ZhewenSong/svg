@@ -1,14 +1,8 @@
-from PIL import Image, ImageFilter
 import numpy as np
 from matplotlib import pyplot as plt
 import re
 import xml.etree.ElementTree as ET
 import sys
-
-# image = Image.open('clef.png')
-# image = image.filter(ImageFilter.FIND_EDGES).convert('L')
-# image.save('outline.png') 
-# scale = [0.1, 0.1]
 
 N = 1000
 supported_cmd = 'mlqcz'
