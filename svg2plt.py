@@ -1,4 +1,3 @@
-from PIL import Image, ImageFilter
 import numpy as np
 from matplotlib import pyplot as plt
 import re
@@ -10,7 +9,7 @@ import sys
 # image.save('outline.png') 
 # scale = [0.1, 0.1]
 
-N = 1000
+N = 10
 supported_cmd = 'mlqcz'
 
 inputfile = sys.argv[1]
