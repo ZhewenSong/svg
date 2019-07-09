@@ -4,7 +4,7 @@ import re
 import xml.etree.ElementTree as ET
 import sys
 
-N = 10
+N = 5
 supported_cmd = 'mlqcz'
 
 inputfile = sys.argv[1]
@@ -92,11 +92,20 @@ for p in path:
         if initx is None:
             initx, inity = lastx, lasty
     elif len(p) == 1:
-        Xs = np.append(Xs, linear_bezier(t, [lastx, initx]))
-        Ys = np.append(Ys, linear_bezier(t, [lasty, inity]))
-        lastx, lasty = initx, inity
+        if lastx != initx or lasty != inity:
+            Xs = np.append(Xs, linear_bezier(t, [lastx, initx]))
+            Ys = np.append(Ys, linear_bezier(t, [lasty, inity]))
+            lastx, lasty = initx, inity
         initx, inity = None, None
 
-plt.plot(Xs, Ys, 'k.')
+T = Xs.size
+coef = np.fft.fft(Xs + 1j * Ys) / T
+freq = np.fft.fftfreq(T, d=1)
+
+def func(tt):
+    return sum(coef * np.exp(2j*np.pi*tt*freq))
+
+t = np.linspace(0, T, 10*T)
+plt.plot([func(tt).real for tt in t], [func(tt).imag for tt in t])
 plt.axis('equal')
 plt.show()
